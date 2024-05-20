@@ -1,0 +1,115 @@
+\section{Iterators}
+Let's delve into the concept of functional programming in Python with a highly significant concept: Iterators.
+ An iterator is an object used to represent a sequence of data, akin 
+ to pointers in C/C++. Particularly, to utilize an iterator, 
+ we employ a function provided by Python called \verb|__next__()|
+or \verb|next()|. This function doesn't require any arguments and returns
+ the next value in the data sequence that the iterator is pointing to.
+  If there are no more elements, \verb|__next__()| will raise a \verb|StopIteration| exception.
+  
+\begin{lstlisting}[style=mystyle]
+    # Define a list
+    my_list = [1, 2, 3, 4, 5]
+    
+    # Create an iterator object
+    my_iterator = iter(my_list)
+    
+    # Iterate over the elements using the next() function
+    while True:
+        try:
+            item = next(my_iterator)
+            print(item)
+        except StopIteration:
+            break
+    
+\end{lstlisting}
+
+
+We can use iterators with \verb|list()|, \verb|tuple()|, and \verb|dict()|.
+\begin{lstlisting}[style=mystyle]
+    # Using iterator with list
+    my_list = [1, 2, 3, 4, 5]
+    list_iterator = iter(my_list)
+    print("List elements:")
+    for item in list_iterator:
+        print(item)
+    
+    # Using iterator with tuple
+    my_tuple = (6, 7, 8, 9, 10)
+    tuple_iterator = iter(my_tuple)
+    print("Tuple elements:")
+    for item in tuple_iterator:
+        print(item)
+    
+    # Using iterator with dictionary
+    my_dict = {'a': 1, 'b': 2, 'c': 3}
+    dict_iterator = iter(my_dict)
+    print("Dictionary elements:")
+    for key in dict_iterator:
+        print(key, my_dict[key])
+    #Output
+    #List elements:
+    #1
+    #2
+    #3
+    #4
+    #5
+    #Tuple elements:
+    #6
+    #7
+    #8
+    #9
+    #10
+    #Dictionary elements:
+    #a 1
+    #b 2
+    #c 3
+\end{lstlisting}
+\subsection{Zip}
+
+The \texttt{zip()} function is used to combine multiple iterables into a single iterator of tuples. It iterates over the iterables in parallel and stops when the shortest iterable is exhausted. Here's an example:
+
+\begin{lstlisting}[style=mystyle]
+# Combine two lists into tuples using zip()
+names = ['Alice', 'Bob', 'Charlie']
+ages = [30, 25, 35]
+for name, age in zip(names, ages):
+    print(f"{name} is {age} years old")
+# Output:
+# Alice is 30 years old
+# Bob is 25 years old
+# Charlie is 35 years old
+\end{lstlisting}
+
+\subsection{Reversed}
+
+The \texttt{reversed()} function returns an iterator that iterates over the elements of a sequence in reverse order. It can be useful when you need to traverse a sequence in reverse. Here's an example:
+
+\begin{lstlisting}[style=mystyle]
+# Iterate over a list in reverse using reversed()
+my_list = [1, 2, 3, 4, 5]
+for item in reversed(my_list):
+    print(item)
+# Output:
+# 5
+# 4
+# 3
+# 2
+# 1
+\end{lstlisting}
+
+\subsection{Iterating Over a Dictionary}
+
+When you iterate over a dictionary in Python, by default, you iterate over its keys. However, you can iterate over key-value pairs using the \texttt{items()} method. Here's an example:
+
+\begin{lstlisting}[style=mystyle]
+# Iterate over key-value pairs in a dictionary
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+for key, value in my_dict.items():
+    print(f"Key: {key}, Value: {value}")
+# Output:
+# Key: a, Value: 1
+# Key: b, Value: 2
+# Key: c, Value: 3
+\end{lstlisting}
+These are additional iterator-related functions and concepts that further enhance the functionality and versatility of iterators in Python.

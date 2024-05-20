@@ -1,0 +1,125 @@
+\section{Function}
+\subsection{Pure function}
+A function that does not cause any side effects other than producing the desired result from the input is called a pure function. Python is not primarily used for functional programming, unlike Haskell, a functional programming language. Python mainly supports mutable objects - variables that can be changed. Therefore, for a function to be a pure function, it must not modify mutable objects. Of course, when deciding to use functional programming in Python, you need to limit the use of global variables.
+
+To write a pure function in Python, you can do the following:
+\begin{lstlisting}[style=mystyle]
+    def pure_function(x:int)->int:
+        return 2*x + 1
+\end{lstlisting}
+A function with global references will include free variable in body of a function. A function that depends on a global variable can be illustrated as follows:
+\begin{lstlisting}[style=mystyle]
+    def some_function(x:int, y:int)->float:
+        return x**2 + y/2 + global_variable
+\end{lstlisting}
+\subsection{Functions as first-class object}
+In Python, functions are considered first-class objects. This means they can be treated in the same way as other objects, such as integers, strings, and lists. As a result, functions have the following capabilities:
+
+\begin{itemize}
+  \item \textbf{Assigned to variables:} You can assign a function to a variable, allowing you to refer to the function by name later.
+  \item \textbf{Passed as arguments:} Functions can be passed as arguments to other functions. This is a powerful concept that enables higher-order functions, which take other functions as arguments or return functions as results.
+  \item \textbf{Returned from functions:} Functions can return other functions. This allows you to create functions dynamically based on certain conditions or inputs.
+  \item \textbf{Stored in data structures:} Functions can be stored in data structures like lists, dictionaries, and sets. This enables you to manage collections of functions and use them as needed.
+\end{itemize}
+
+Here's a breakdown of these concepts with Python code examples:
+
+\textbf{Assigning Functions to Variables}
+
+\begin{lstlisting}[style=mystyle]
+def greet(name):
+  """Greets a person by name."""
+  return f"Hello, {name}!"
+
+greeting = greet  # Assign the function to a variable
+message = greeting("Alice")  # Use the variable to call the function
+print(message)  # Output: Hello, Alice!
+\end{lstlisting}
+
+\textbf{Passing Functions as Arguments}
+
+\begin{lstlisting}[style=mystyle]
+def apply_function(func, numbers):
+  """
+  Applies a function to a list of numbers.
+
+  Args:
+      func: The function to apply.
+      numbers: The list of numbers.
+
+  Returns:
+      A list containing the results of applying the function to each number.
+  """
+  return [func(x) for x in numbers]
+
+def square(x):
+  """
+  Squares a number.
+
+  Args:
+      x: The number to square.
+
+  Returns:
+      The square of the number.
+  """
+  return x * x
+
+# Example usage
+numbers = [1, 2, 3, 4]
+squared_numbers = apply_function(square, numbers)
+print(squared_numbers)  # Output: [1, 4, 9, 16]
+\end{lstlisting}
+
+\textbf{Returning Functions from Functions}
+
+\begin{lstlisting}[style=mystyle]
+def create_greeter(greeting_text):
+  """
+  Creates a function that returns a greeting message.
+
+  Args:
+      greeting_text: The text to use in the greeting.
+
+  Returns:
+      A function that returns a greeting message.
+  """
+  def greeter(name):
+    return f"{greeting_text}, {name}!"
+  return greeter
+
+# Example usage
+morning_greeter = create_greeter("Good morning")
+message = morning_greeter("Bob")
+print(message)  # Output: Good morning, Bob!
+\end{lstlisting}
+
+\textbf{Storing Functions in Data Structures}
+
+\begin{lstlisting}[style=mystyle]
+def calculate(operation, x, y):
+  """
+  Performs a mathematical operation on two numbers.
+
+  Args:
+      operation: A function representing the mathematical operation (add, subtract, etc.).
+      x: The first number.
+      y: The second number.
+
+  Returns:
+      The result of the operation.
+  """
+  return operation(x, y)
+
+operations = {
+  "add": lambda x, y: x + y,
+  "subtract": lambda x, y: x - y,
+  "multiply": lambda x, y: x * y,
+}
+
+result = calculate(operations["add"], 5, 3)
+print(result)  # Output: 8
+\end{lstlisting}
+
+This example shows a dictionary (\texttt{operations}) that stores different mathematical operations as functions. The \texttt{calculate} function retrieves the appropriate function based on the provided operation string and executes it with the given numbers.
+
+By treating functions as first-class objects, Python offers a powerful and flexible way to write concise, modular, and reusable code. This capability is a cornerstone of functional programming techniques that can be effectively applied in various programming tasks.
